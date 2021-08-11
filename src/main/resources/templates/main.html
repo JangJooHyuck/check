@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <!-- thymeleaf 의 fragment 기능으로 모듈화(fragments/module.html) 참고링크 http://yoonbumtae.com/?p=2609 -->
+<head th:replace="fragments/module.html :: head">
+</head>
+
+<body>
+
+    <!-- header -->
+
+    <header>
+      <!-- fragments폴더안에 module.html 에 있는 header 가져오기-->
+      <div th:replace="fragments/module.html :: header"></div>
+  </header>
+
+
+  <!-- spinner -->
+
+    <!-- display가 none 이면 없어지고, block 이면 나타남-->
+   <div id="spinner" style="display:none">
+    <!--loader는 회전하는 그림, css 에서 정리해놈 -->
+    <div class="loader"></div>
+
+</div>
+    </script>
+
+    <!-- Body -->
+
+    <body>
+    <form class="emailSubscribe">
+        <!-- 제목 -->
+        <p><span style="border-radius: 50px 50px 50px 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 5px solid #5bd9ff;
+        padding: 0.5em 0.6em;
+        color: #FF8000;">Checking Email</span>
+       </p>
+       <br>
+       <center>
+         <!-- 이메일 입력칸 -->
+         <!-- placeholder = input 박스 안에 텍스트,
+            onfocus = 박스클릭했을 때 placeholder 문구 삭제
+            onblur = 다른 곳을 클릭했을 때 다시 박스안에 텍스트 생성-->
+            <div id="emailinput">
+        <input type="text" id="email" placeholder=" 이메일을 입력하세요."onfocus="this.placeholder=''"
+        onblur="this.placeholder=' 이메일을 입력하세요.'"
+        autocomplete="off"
+        style="width: 150pt; height:20pt"/></div>
+
+       <br>
+            <!-- 이메일 체크버튼, 각각 클릭시 ajaxGetAPI()또는 ajaxPostAPI() 호출 -->
+            <div id="btn_group">
+            <button  id="btn_1" type="button" onclick="ajaxGetAPI()" >GET</button>
+            <button  id="btn_2" type="button" onclick="ajaxPostAPI()" >POST</button>
+        </div>
+            <div >
+              <br>
+              <!-- 사용자가 입력한 이메일을 출력해주는 곳-->
+                <h1 id="emailprint"></h1>
+            </div>
+            <div >
+              <!-- 사용자가 입력한 이메일이 형식에 맞는지 success 또는 fail 을 출력해주는곳-->
+                <h1 id="result"></h1>
+            </div>
+     </form>
+    </center>
+  </body>
+
+  <!-- footer -->
+
+      <footer>
+        <!-- fragments폴더안에 module.html 에 있는 footer 가져오기-->
+        <div th:replace="fragments/module.html :: footer"></div>
+    </footer>
+
+    <script src="/js/Getapi.js" defer></script>
+    <script src="/js/POSTapi.js" defer></script>
+</body>
+</html>

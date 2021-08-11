@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head 부분-->
+<head>
+  <head th:replace="fragments/module.html :: head">
+</head>
+
+<!-- header 부분-->
+    <header>
+      <head th:replace="fragments/module.html :: header">
+    </header>
+
+<!-- body 부분-->
+    <body>
+      <br>
+      <br>
+      <br>
+    <table class ="table" id="UserLog" border="1">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">createdDate</th>
+                <th scope="col">modifiedDate</th>
+                <th scope="col">UserIP</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Result</th>
+            </tr>
+        </thead>
+        <tbody id = "userlogTBody">
+          <tr th:each="list : ${userlogs}">
+            <td><span th:text="${list.id}"></span></td>
+            <td><span th:text="${list.createdDate}"></span></td>
+            <td><span th:text="${list.modifiedDate}"></span></td>
+            <td><span th:text="${list.UserIP}"></span></td>
+            <td><span th:text="${list.Mail}"></span></td>
+            <td><span th:text="${list.Result}"></span></td>
+
+        </tbody>
+    </table>
+    <div class="text-center">
+      <ul id="pagination-demo" class="pagination-sm">
+      </ul>
+    </body>
+    </div>
+
+    <!-- footer 부분-->
+    <footer>
+      <head th:replace="fragments/module.html :: footer">
+    </footer>
+
+    <script th:inline="javascript">
+      var currentPage = /*[[${pagingData.currentPage}]]*/;
+      var totalPage =  /*[[${pagingData.totalPage}]]*/;
+      $("#pagination-demo").twbsPagination({
+        totalPages : totalPage, // 전체 페이지 수
+        startPage : currentPage, // 시작시 표시되는 현재 페이지
+        visiblePages : 10, // 하단에 한번에 보여지는 페이지번호
+        initiateStartPageClick : false, // 플러그인 시작시 페이지 버튼 클릭 여부
+
+        //클릭 이벤트
+        onPageClick : function (event, page){
+
+          //printlog?value= 페이지 번호
+          window.location.href = '/printlog?value=' + page;
+        }
+      });
+
+    </script>
+    </ul>
+    </script>
+
+</html>
