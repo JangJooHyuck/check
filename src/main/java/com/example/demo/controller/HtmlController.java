@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +22,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-
 @Controller
 public class HtmlController {
 
@@ -38,30 +36,31 @@ public class HtmlController {
 
     Word userWord = new Word();
 
-
-
     @RequestMapping("/")
     public String email_check() throws Exception {
-        //index.html 불러옴
+        // index.html 불러옴
         return "index";
     }
 
-    //main.html
+    // main.html
     @ModelAttribute
     @RequestMapping("/main")
-    public String main(Model model) throws Exception{
-        HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+    public String main(Model model) throws Exception {
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest();
         String mailString = req.getHeader("X-FORWARDED-FOR");
-        if(mailString == null){
+        if (mailString == null) {
             mailString = req.getRemoteAddr();
         }
         model.addAttribute("value", mailString);
         return "main";
     }
-    //printLog.html
+
+    // printLog.html
     @RequestMapping(value = "/printlog", method = RequestMethod.GET)
-    public String printLog(@RequestParam(value = "value", defaultValue = "1")int pageNumber, Model model) throws Exception{
-        Pageable pageable = PageRequest.of(pageNumber -1, 10, Sort.by("id").descending());
+    public String printLog(@RequestParam(value = "value", defaultValue = "1") int pageNumber, Model model)
+            throws Exception {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("id").descending());
 
         paging.setCurrentPage(pageNumber);
         paging.setTotalPage(jpaService.findAll(pageable).getTotalPages());
@@ -71,28 +70,32 @@ public class HtmlController {
         return "printlog";
     }
 
-    //dictionary.html
+    // dictionary.html
     @ModelAttribute
     @RequestMapping(value = "/dictionary", method = RequestMethod.GET)
-    public String dictionary(@RequestParam(value = "word", required = false)String word, Model model) throws Exception{
-        //thymeleaf로 값 html에 배치시키기
-        if(word == null){
+    public String dictionary(@RequestParam(value = "word", required = false) String word, Model model)
+            throws Exception {
+        // thymeleaf로 값 html에 배치시키기
+        if (word == null) {
             userWord = new Word();
             model.addAttribute("userWord", userWord);
             return "dictionary";
-        }
-        else
-        {
-            if(findword.findByWord(word) == null){
+        } else {
+            if (findword.findByWord(word) == null) {
                 findword.save(new Word(word, findword.getContent(word)));
                 userWord = findword.findByWord(word);
                 model.addAttribute("userWord", userWord);
-            }
-            else{
+            } else {
                 userWord = findword.findByWord(word);
                 model.addAttribute("userWord", userWord);
             }
         }
         return "dictionary";
     }
+
+    @RequestMapping(value = "/wordRank")
+    public String wordRank() throws Exception {
+        return "wordRank";
+    }
+
 }
