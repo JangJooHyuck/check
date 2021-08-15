@@ -28,7 +28,7 @@ public class Word {
     private String content;
 
     @Builder
-    public Word(String word, String content){
+    public Word(String word, String content) {
         this.word = word;
         this.content = content;
     }

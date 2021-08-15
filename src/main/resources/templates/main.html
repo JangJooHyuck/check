@@ -14,12 +14,7 @@
   </header>
 
 
-  <!-- spinner -->
-
-    <!-- display가 none 이면 없어지고, block 이면 나타남-->
-   <div id="spinner" style="display:none">
-    <!--loader는 회전하는 그림, css 에서 정리해놈 -->
-    <div class="loader"></div>
+  
 
 </div>
     </script>
@@ -77,7 +72,15 @@
         <!-- fragments폴더안에 module.html 에 있는 footer 가져오기-->
         <div th:replace="fragments/module.html :: footer"></div>
     </footer>
+  
+  <!-- 블러처리할 부분의 끝 (스피너돌아갈때)-->
 
+  <!-- spinner -->
+    <!-- display가 none 이면 없어지고, block 이면 나타남-->
+    <div id="spinner" style="display:none">
+      <!--loader는 회전하는 그림, css 에서 정리해놈 -->
+      <div class="loader"></div>
+      <div class="spinner_overlay"></div>
     <script src="/js/Getapi.js" defer></script>
     <script src="/js/POSTapi.js" defer></script>
 </body>
