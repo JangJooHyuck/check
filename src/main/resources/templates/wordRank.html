@@ -3,8 +3,10 @@
 
 <!-- head 부분-->
 <head>
+
+<link rel="stylesheet" type="text/css" href="/css/Rank.css">
   <head th:replace="fragments/module.html :: head">
-	<link rel="stylesheet" type="text/css" href="/css/ranking.css">
+	
 </head>
 <!-- header 부분-->
 <header>
@@ -14,34 +16,30 @@
   <body>
 	<br>
 	<br>
-	<div class="main">
+	<div class="Rankmain">
 		<input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
-		<label for="tab1">tab menu1</label>
+		<label for="tab1">Daily</label>
 	
 		<input id="tab2" type="radio" name="tabs">
-		<label for="tab2">tab menu2</label>
+		<label for="tab2">Week</label>
 	
 		<input id="tab3" type="radio" name="tabs">
-		<label for="tab3">tab menu3</label>
-	
-		
+		<label for="tab3">Month</label>
 	
 		<section id="content1">
-			<p>tab menu1의 내용</p>
+			<p>Daily 내용</p>
 		</section>
 	
 		<section id="content2">
-			<p>tab menu2의 내용</p>
+			<p>Week 내용</p>
 		</section>
 	
 		<section id="content3">
-			<p>tab menu3의 내용</p>
+			<p>Month 내용</p>
 		</section>
 	
-		</div>
 	</div>
-</div>
-</div>
+	
   </body>
   
 
