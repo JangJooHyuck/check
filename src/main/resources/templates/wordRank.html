@@ -5,7 +5,6 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="/css/Rank.css">
-<script type="text/JavaScript" src="/js/RankService.js"></script>
   <head th:replace="fragments/module.html :: head">
 	
 </head>
@@ -15,24 +14,27 @@
   </header>
   <!-- body 부분-->
   <body>
+	<script type="text/JavaScript" src="/js/RankService.js"></script>
+	
 	<br>
 	<br>
+	
 	<div class="Rankmain">
 
 		<ul class="tables">
-			<li class="tab-link current" data-tab="tab-1">메뉴_하나</li>
-			<li class="tab-link" data-tab="tab-2">메뉴_둘</li>
-			<li class="tab-link" data-tab="tab-3">메뉴_셋</li>
+			<li class="tab-link current" data-tab="tab-1">Daily</li>
+			<li class="tab-link" data-tab="tab-2">Week</li>
+			<li class="tab-link" data-tab="tab-3">Month</li>
 		</ul>
 	
 		<div id="tab-1" class="tab-content current">
-	---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ----
+			Daily리스트
 		</div>
 		<div id="tab-2" class="tab-content">
-	---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ---- ---- ---- ----
+			Week리스트
 		</div>
 		<div id="tab-3" class="tab-content">
-	---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
+			Month리스트
 		</div>
 	
 	</div>
