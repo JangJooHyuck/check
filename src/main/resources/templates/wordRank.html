@@ -4,6 +4,7 @@
 <!-- head 부분-->
 <head>
   <head th:replace="fragments/module.html :: head">
+	<link rel="stylesheet" type="text/css" href="/css/ranking.css">
 </head>
 <!-- header 부분-->
 <header>
@@ -11,37 +12,38 @@
   </header>
   <!-- body 부분-->
   <body>
-<!-- create table -->
-<br>
-<br>
-<br>
-<div class="tabWrap">
-	<ul class="tab_Menu">
-		<li class="tabMenu current">
-			<a href="#tabContent01" >Daily</a>
-		</li>
-		<li class="tabMenu">
-			<a href="#tabContent02" >Week</a>
-		</li>
-		<li class="tabMenu">
-			<a href="#tabContent03" >Month</a>
-		</li>
-	</ul>
-	<div class="tab_Content_Wrap">
-		<div id="tabContent01" class="tabPage">
-			Tab1 Content
-		</div>
-		<div id="tabContent02" class="tabPage">
-			Tab2 Content
-		</div>
-		<div id="tabContent03" class="tabPage">
-			Tab3 Content
+	<br>
+	<br>
+	<div class="main">
+		<input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
+		<label for="tab1">tab menu1</label>
+	
+		<input id="tab2" type="radio" name="tabs">
+		<label for="tab2">tab menu2</label>
+	
+		<input id="tab3" type="radio" name="tabs">
+		<label for="tab3">tab menu3</label>
+	
+		
+	
+		<section id="content1">
+			<p>tab menu1의 내용</p>
+		</section>
+	
+		<section id="content2">
+			<p>tab menu2의 내용</p>
+		</section>
+	
+		<section id="content3">
+			<p>tab menu3의 내용</p>
+		</section>
+	
 		</div>
 	</div>
 </div>
 </div>
   </body>
-  <script type="text/JavaScript" src="/js/RankService.js"></script>
+  
 
   
 

@@ -111,42 +111,10 @@ input {
          100% {transform: rotate(360deg);
         }
     }
-    /* 사전랭킹 css 참고 url = https://hkhub.tistory.com/43 */
+    /* 사전랭킹 css 참고 url = */
 
-    .tabWrap {
-      width:450px;
-      height: 500px;
-    }
-    .tab_Menu {
-      margin: 0px;
-      padding: 0px;
-      list-style: none;
-    }
-    .tabMenu { 
-      width: 150px; 
-      margin: 0px; 
-      text-align: center; 
-      padding-top: 10px; 
-      padding-bottom: 10px; 
-      float: left; 
-    }
-     .tabMenu a { 
-      color: #000000; 
-      font-weight: bold; 
-      text-decoration: none; 
-    }
-    .current { 
-      background-color: #FFFFFF; 
-      border: 1px solid blue; 
-      background-color: #3498db;
-      border-bottom:hidden; 
-      transition: 1.0s;
-    }
-    .tabPage { 
-      width: 900px; 
-      height: 470px; float: left; 
-      border: 1px solid blue; 
-    }
+   
+   
 
 
     
