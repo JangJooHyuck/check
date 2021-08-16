@@ -5,6 +5,7 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="/css/Rank.css">
+<script type="text/JavaScript" src="/js/RankService.js"></script>
   <head th:replace="fragments/module.html :: head">
 	
 </head>
@@ -17,26 +18,22 @@
 	<br>
 	<br>
 	<div class="Rankmain">
-		<input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
-		<label for="tab1">Daily</label>
+
+		<ul class="tables">
+			<li class="tab-link current" data-tab="tab-1">메뉴_하나</li>
+			<li class="tab-link" data-tab="tab-2">메뉴_둘</li>
+			<li class="tab-link" data-tab="tab-3">메뉴_셋</li>
+		</ul>
 	
-		<input id="tab2" type="radio" name="tabs">
-		<label for="tab2">Week</label>
-	
-		<input id="tab3" type="radio" name="tabs">
-		<label for="tab3">Month</label>
-	
-		<section id="content1">
-			<p>Daily 내용</p>
-		</section>
-	
-		<section id="content2">
-			<p>Week 내용</p>
-		</section>
-	
-		<section id="content3">
-			<p>Month 내용</p>
-		</section>
+		<div id="tab-1" class="tab-content current">
+	---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ----
+		</div>
+		<div id="tab-2" class="tab-content">
+	---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ---- ---- ---- ----
+		</div>
+		<div id="tab-3" class="tab-content">
+	---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
+		</div>
 	
 	</div>
 	
