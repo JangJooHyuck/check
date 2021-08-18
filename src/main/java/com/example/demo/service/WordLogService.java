@@ -28,4 +28,8 @@ public class WordLogService {
         return wordLogRepository.findCountByWordRank(startDate, endDate);
     }
 
+    public Long deleteByWord(String word) {
+        return wordLogRepository.deleteByWord(word);
+    }
+
 }

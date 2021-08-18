@@ -28,6 +28,14 @@ public class Findword {
         return doc.select("ul.list_search").first().text();
     }
 
+    public void updateWord(String word, String content) {
+        wordRepository.updateContent(word, content);
+    }
+
+    public long deleteByWord(String word) {
+        return wordRepository.deleteByWord(word);
+    }
+
     // 단어로 db에 저장된 데이터를 불러오는 서비스
     public Word findByWord(String word) throws Exception {
         return wordRepository.findByWord(word);

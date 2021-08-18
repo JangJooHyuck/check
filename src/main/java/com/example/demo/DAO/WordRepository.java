@@ -11,10 +11,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
 
-    Word findByWord(String word);
-
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("Update Word w SET w.content = :content WHERE w.word = :word")
     void updateContent(@Param("word") String word, @Param("content") String content);
+
+    Word findByWord(String word);
+
+    @Transactional
+    Long deleteByWord(String word);
 }

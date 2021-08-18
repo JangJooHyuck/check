@@ -2,6 +2,8 @@ package com.example.demo.DAO;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +24,7 @@ public interface WordLogRepository extends JpaRepository<WordLog, Long> {
                         + "where created_date " + "between :startDate and :endDate " + "group by word "
                         + ")t", nativeQuery = true)
         int findCountByWordRank(@Param("startDate") String startDate, @Param("endDate") String endDate);
+
+        @Transactional
+        Long deleteByWord(String word);
 }

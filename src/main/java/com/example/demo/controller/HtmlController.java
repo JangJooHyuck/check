@@ -105,17 +105,17 @@ public class HtmlController {
         return "dictionary";
     }
 
-    @RequestMapping(value = "/wordRank", method = RequestMethod.GET)
+    @RequestMapping(value = "/dictionaryfav", method = RequestMethod.GET)
     public String dicRank(@RequestParam(value = "period", defaultValue = "Daily") String period,
             @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) throws Exception {
-        List<WordRank> wordrank = wordLogService.findWordRank(dateCal.findStartDate(period), dateCal.findEndDate(),
+        List<WordRank> wordRank = wordLogService.findWordRank(dateCal.findStartDate(period), dateCal.findEndDate(),
                 (currentPage - 1) * 10);
         int totalPage = wordLogService.findCountByWordRank(dateCal.findStartDate(period), dateCal.findEndDate());
         totalPage = totalPage % 10 > 0 ? totalPage / 10 + 1 : totalPage / 10;
-        model.addAttribute("wordRank", wordrank);
+        model.addAttribute("wordRank", wordRank);
         model.addAttribute("period", period);
-        model.addAttribute("pagingData", paging);
+        model.addAttribute("pagingData", Paging.builder().currentPage(currentPage).totalPage(totalPage).build());
 
-        return "wordRank";
+        return "dictionaryfav";
     }
 }

@@ -19,6 +19,7 @@ import com.example.demo.model.User;
 import com.example.demo.service.EmailcheckService;
 import com.example.demo.service.Findword;
 import com.example.demo.service.JPAService;
+import com.example.demo.service.WordLogService;
 
 @Controller // /api로 들어오는것들은 밑에 클래스에서 받아올수있다.
 @RequestMapping("/api")
@@ -36,7 +37,10 @@ public class ApiController {
     Userlog userlog2 = new Userlog();
 
     @Autowired
-    Findword findword;
+    Findword findwordservice;
+
+    @Autowired
+    WordLogService wordLogService;
 
     // get방식
     @GetMapping("/get")
@@ -69,16 +73,16 @@ public class ApiController {
     @ResponseBody
     public Word POSTResultDic(@RequestBody Word word) throws Exception {
         // ajax로 api호출해서 값받고 js로 전달
-        if (findword.findByWord(word.getWord()) != null) {
+        if (findwordservice.findByWord(word.getWord()) != null) {
             // 3초 지연
             Thread.sleep(3000);
-            return findword.findByWord(word.getWord());
+            return findwordservice.findByWord(word.getWord());
         } else {
             Thread.sleep(3000);
-            findword.save(new Word(word.getWord(), findword.getContent(word.getWord())));
+            findwordservice.save(new Word(word.getWord(), findwordservice.getContent(word.getWord())));
         }
 
-        return findword.findByWord(word.getWord());
+        return findwordservice.findByWord(word.getWord());
     }
 
     @GetMapping("/ajax")
@@ -87,6 +91,20 @@ public class ApiController {
             throws Exception {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("id").descending());
         return jpaService.findAll(pageable);
+    }
+
+    @RequestMapping(value = "/updateword", method = RequestMethod.POST)
+    @ResponseBody
+    public Word updateWord(@RequestBody Word word) throws Exception {
+        findwordservice.updateWord(word.getWord(), word.getContent());
+        return findwordservice.findByWord(word.getWord());
+    }
+
+    @RequestMapping(value = "/deleteword", method = RequestMethod.POST)
+    @ResponseBody
+    public void deleteWord(@RequestBody Word word) throws Exception {
+        findwordservice.deleteByWord(word.getWord());
+        wordLogService.deleteByWord(word.getWord());
     }
 
 }
