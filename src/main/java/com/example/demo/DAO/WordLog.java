@@ -7,32 +7,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Repository;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// DB에 wordLog 라는 테이블 생성
 @Getter
 @NoArgsConstructor
-@Repository
 @Entity
-@Table(name = "words")
-public class Word {
+@Table(name = "wordLog")
+public class WordLog extends createTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    int idx;
 
     @Column
-    private String word;
+    Long id;
 
     @Column
-    private String content;
+    String word;
 
     @Builder
-    public Word(String word, String content) {
+    public WordLog(Long id, String word) {
+        this.id = id;
         this.word = word;
-        this.content = content;
     }
 }

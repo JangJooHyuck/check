@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Repository;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +11,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Paging {
 
-    //페이징 데이타
-    int CurrentPage; // 현재페이지
-    int TotalPage; // 총페이지
+    // 페이징 데이타
+    int currentPage; // 현재페이지
+    int totalPage; // 총페이지
+
+    @Builder
+    public Paging(int currentPage, int totalPage) {
+        this.currentPage = currentPage;
+        this.totalPage = totalPage;
+    }
+
 }

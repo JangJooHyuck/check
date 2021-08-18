@@ -18,26 +18,75 @@
 	
 	<br>
 	<br>
-	
-	<div class="Rankmain">
-
-		<ul class="tables">
-			<li class="tab-link current" data-tab="tab-1">Daily</li>
-			<li class="tab-link" data-tab="tab-2">Week</li>
-			<li class="tab-link" data-tab="tab-3">Month</li>
-		</ul>
-	
-		<div id="tab-1" class="tab-content current">
-			Daily리스트
-		</div>
-		<div id="tab-2" class="tab-content">
-			Week리스트
-		</div>
-		<div id="tab-3" class="tab-content">
-			Month리스트
-		</div>
-	
-	</div>
+	<div class="content">
+		<div class="content-inside">
+		  <div class="radiobutton">
+			<div id = "btnGroup" class="btn-group btn-group-toggle" data-toggle="buttons">
+			  <label class="btn btn-info" id="Daily"><input type="radio" name="options" autocomplete="off" checked>Daily</label>
+			  <label class="btn btn-info" id="Week"><input type="radio" name="options" autocomplete="off">Weekly</label>
+			  <label class="btn btn-info" id="Month"><input type="radio" name="options" autocomplete="off">Monthly</label>
+			</div>
+		  </div>
+		  <div class="center">
+			<table class ="table" id="UserLog" border="1">
+			  <thead class="thead-dark">
+				<tr>
+				  <th scope="col">id</th>
+				  <th scope="col">단어</th>
+				  <th scope="col">검색횟수</th>
+				  <th scope="col"></th>
+				</tr>
+			  </thead>
+			  <tbody id = "userLogTBody">
+				<tr th:each="list : ${wordRank}">
+				  <th scope="row"><span th:text="${list.getIdx()}"></span></td>
+					<td><span th:text="${list.getWord()}"></span></td>
+					<td><span th:text="${list.getCount()}"></span></td>
+					<td><button class="updateBtn">수정</button> <button class="deleteBtn">삭제</button></td>
+				  </tbody>
+				</table>
+				<div class="text-center">
+				  <ul id="pagination-demo" class="pagination-sm">
+				  </ul>
+				</div>
+			  </div>
+			  </div>
+			</div>
+			<div id="updateModal" class="modal" tabindex="-1">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">Update word</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+				  </div>
+				  <div class="modal-body">
+					<p id="editedWord"></p>
+					<input id="editedContent" type="text" class="form-control width100" placeholder="Please enter the content to be edited">
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="saveWord()">Save</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div id="deleteModal" class="modal" tabindex="-1">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">Update word</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+				  </div>
+				  <div class="modal-body">
+					<p id="deleteWord"></p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="delWord()">Delete</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
 	
   </body>
   

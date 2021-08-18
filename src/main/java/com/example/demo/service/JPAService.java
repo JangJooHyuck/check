@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.DAO.Userlog;
-import com.example.demo.DAO.UserlogPagingRepository;
 import com.example.demo.DAO.UserlogRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,28 +8,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
-
 @Service
 public class JPAService {
 
     @Autowired
     private UserlogRepository userlogRepository;
 
-    @Autowired
-    private UserlogPagingRepository userlogPagingRepository;
-
-    public void save(Userlog userlog){
+    public void save(Userlog userlog) {
         userlogRepository.save(userlog);
     }
 
-    public Userlog findFirstByOrderByIdDesc(){
+    public Userlog findFirstByOrderByIdDesc() {
         return userlogRepository.findFirstByOrderByIdDesc();
     }
 
-    public Page<Userlog> findAll(Pageable pageable){
-        return userlogPagingRepository.findAll(pageable);
+    public Page<Userlog> findAll(Pageable pageable) {
+        return userlogRepository.findAll(pageable);
     }
 
 }

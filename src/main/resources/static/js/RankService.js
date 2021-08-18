@@ -1,14 +1,71 @@
-//tab 화면 만들기
-$(document).ready(function(){
-	
-	$('ul.tables li').click(function(){
-		var tab_id = $(this).attr('data-tab');
+var updateWord;
+var deleteWord;
 
-		$('ul.tables li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-	})
+$(".updateBtn").click(function(){
+    var checkBtn = $(this);
+    var tr = checkBtn.parent().parent();
+    var td = tr.children();
+    updateWord = td.eq(1).text();
+    console.log("update " + updateWord);
+    $("#updateModal").modal("show");
+    document.getElementById("editedWord").innerText = "내용을 수정할 단어 : " + updateWord;
 })
-//참고 url https://imivory.tistory.com/8
+
+$(".deleteBtn").click(function(){
+    var checkBtn = $(this);
+    var tr = checkBtn.parent().parent();
+    var td = tr.children();
+    deleteWord = td.eq(1).text();
+    console.log("delete " + deleteWord);
+    $("#deleteModal").modal("show");
+    document.getElementById("deleteWord").innerText = "삭제하실 단어 : " + deleteWord;
+})
+
+function saveWord(){
+    var updateContent = document.getElementById("editedContent").value;
+    $.ajax({
+        type : "POST",
+        async : "async",
+        url : "http://localhost:9000/api/updateword",
+        contentType: "application/json",
+        data : JSON.stringify({
+            id : null,
+            word : updateWord,
+            content : updateContent
+        }),
+        dataType: "json",
+        success:function(data){
+            closeModal();
+        }
+        ,error:function(data){
+            closeModal();
+        }
+    });
+}
+
+function delWord(){
+    $.ajax({
+        type : "POST",
+        async : "async",
+        url : "http://localhost:9000/api/deleteword",
+        contentType: "application/json",
+        data : JSON.stringify({
+            id : null,
+            word : deleteWord,
+            content : null
+        }),
+        dataType: "json",
+        success:function(data){
+            closeModal();
+            window.location.href = "/dictionaryfav";
+        }
+        ,error:function(data){
+            closeModal();
+            window.location.href = "/dictionaryfav";
+        }
+    });
+}
+
+function closeModal(){
+    $(".modal").modal("hide");
+}

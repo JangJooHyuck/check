@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.DAO.Word;
+import com.example.demo.DAO.WordRank;
+import com.example.demo.service.DateCalService;
 import com.example.demo.service.Findword;
 import com.example.demo.service.JPAService;
 import com.example.demo.service.Paging;
+import com.example.demo.service.WordLogService;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +39,14 @@ public class HtmlController {
     @Autowired
     Findword findword;
 
-    Word userWord = new Word();
+    @Autowired
+    WordLogService wordLogService;
+
+    @Autowired
+    Word userWord;
+
+    @Autowired
+    DateCalService dateCal;
 
     @RequestMapping("/")
     public String email_check() throws Exception {
@@ -62,11 +74,10 @@ public class HtmlController {
             throws Exception {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("id").descending());
 
-        paging.setCurrentPage(pageNumber);
-        paging.setTotalPage(jpaService.findAll(pageable).getTotalPages());
-        // Thymeleaf 로 받을 List<User> , paging 2가지 데이터를 추가
+        // Thymeleaf 로 받을 List<User> , paging 2가지 데이터를 추가ß
         model.addAttribute("userlogs", jpaService.findAll(pageable).getContent());
-        model.addAttribute("pagingData", paging);
+        model.addAttribute("pagingData", Paging.builder().currentPage(pageNumber)
+                .totalPage(jpaService.findAll(pageable).getTotalPages()).build());
         return "printlog";
     }
 
@@ -81,6 +92,7 @@ public class HtmlController {
             model.addAttribute("userWord", userWord);
             return "dictionary";
         } else {
+
             if (findword.findByWord(word) == null) {
                 findword.save(new Word(word, findword.getContent(word)));
                 userWord = findword.findByWord(word);
@@ -93,9 +105,17 @@ public class HtmlController {
         return "dictionary";
     }
 
-    @RequestMapping(value = "/wordRank")
-    public String wordRank() throws Exception {
+    @RequestMapping(value = "/wordRank", method = RequestMethod.GET)
+    public String dicRank(@RequestParam(value = "period", defaultValue = "Daily") String period,
+            @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) throws Exception {
+        List<WordRank> wordrank = wordLogService.findWordRank(dateCal.findStartDate(period), dateCal.findEndDate(),
+                (currentPage - 1) * 10);
+        int totalPage = wordLogService.findCountByWordRank(dateCal.findStartDate(period), dateCal.findEndDate());
+        totalPage = totalPage % 10 > 0 ? totalPage / 10 + 1 : totalPage / 10;
+        model.addAttribute("wordRank", wordrank);
+        model.addAttribute("period", period);
+        model.addAttribute("pagingData", paging);
+
         return "wordRank";
     }
-
 }

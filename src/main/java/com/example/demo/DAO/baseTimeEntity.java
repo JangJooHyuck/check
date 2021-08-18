@@ -14,11 +14,13 @@ import lombok.Getter;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class TimeEntity {
-
+public class baseTimeEntity {
+    // 생성된 날짜
     @CreatedDate
     private LocalDateTime createdDate;
 
+    // 마지막으로 수정된날짜
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
 }
