@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "wordLog")
+@Table(name = "word_log")
 public class WordLog extends createTimeEntity {
 
     @Id

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.DAO.Word;
+import com.example.demo.DAO.WordLog;
 import com.example.demo.DAO.WordRank;
 import com.example.demo.service.DateCalService;
 import com.example.demo.service.Findword;
@@ -88,19 +89,21 @@ public class HtmlController {
             throws Exception {
         // thymeleaf로 값 html에 배치시키기
         if (word == null) {
-            userWord = new Word();
-            model.addAttribute("userWord", userWord);
+
+            model.addAttribute("userWord", new Word());
             return "dictionary";
         } else {
-
             if (findword.findByWord(word) == null) {
-                findword.save(new Word(word, findword.getContent(word)));
-                userWord = findword.findByWord(word);
-                model.addAttribute("userWord", userWord);
+                findword.save(Word.builder().word(word).content(findword.getContent(word)).build());
+                wordLogService.save(WordLog.builder().id(findword.findByWord(word).getId()).word(word).build());
+                model.addAttribute("userWord", findword.findByWord(word));
+
             } else {
-                userWord = findword.findByWord(word);
-                model.addAttribute("userWord", userWord);
+                wordLogService.save(WordLog.builder().id(findword.findByWord(word).getId()).word(word).build());
+                model.addAttribute("userWord", findword.findByWord(word));
+
             }
+
         }
         return "dictionary";
     }

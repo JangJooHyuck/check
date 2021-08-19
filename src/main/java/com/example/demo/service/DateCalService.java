@@ -13,7 +13,7 @@ public class DateCalService {
 
         if (period.equals("Daily")) {
             return LocalDate.now().toString();
-        } else if (period.equals("Week")) {
+        } else if (period.equals("Weekly")) {
             return LocalDate.now().minusDays(7).toString();
         } else {
             return LocalDate.now().minusDays(30).toString();

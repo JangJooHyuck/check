@@ -61,38 +61,3 @@ async function ajaxPostAPI(){
        });
 }
 
-async function ajaxPostDic(){
-
-   // html 에서 값을 getword에 저장함
-   var getword = document.getElementById("word").value;
-   var title = $("#title").text();
-
-   //제이쿼리. spinner 에 있는 display 값을 block으로 해준다.
-
-   $("#spinner").css("display", "block");
-
-   //ajax 통신
-   $.ajax({
-       type: "POST",
-       async: "async",
-       url: "http://localhost:1233/api/postDic",
-       contentType: "application/json",
-       data: JSON.stringify({
-           word : getword,
-           content : ""
-       })
-       ,dataType: "json"
-       ,success:function(data){
-            console.log(data);
-
-          document.getElementById("wordprint").innerText = data.word;
-          document.getElementById("wordprint2").innerText = data.content;
-
-            $("#spinner").css("display", "none");
-
-            }
-
-
-  });
-}
-
