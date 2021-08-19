@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.DAO.Userlog;
 import com.example.demo.DAO.Word;
+
 import com.example.demo.model.User;
 import com.example.demo.service.EmailcheckService;
 import com.example.demo.service.Findword;
@@ -73,13 +74,16 @@ public class ApiController {
     @ResponseBody
     public Word POSTResultDic(@RequestBody Word word) throws Exception {
         // ajax로 api호출해서 값받고 js로 전달
+
         if (findwordservice.findByWord(word.getWord()) != null) {
             // 3초 지연
             Thread.sleep(3000);
             return findwordservice.findByWord(word.getWord());
+
         } else {
             Thread.sleep(3000);
             findwordservice.save(new Word(word.getWord(), findwordservice.getContent(word.getWord())));
+
         }
 
         return findwordservice.findByWord(word.getWord());
