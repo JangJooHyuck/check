@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -67,26 +68,6 @@ public class ApiController {
         jpaService.save(
                 new Userlog(userlog.getUserip(), userlog.getMail(), emailcheckservice.isValidEmail(userlog.getMail())));
         return jpaService.findFirstByOrderByIdDesc();
-    }
-
-    // post dictionary
-    @RequestMapping(value = "/postDic", method = RequestMethod.POST)
-    @ResponseBody
-    public Word POSTResultDic(@RequestBody Word word) throws Exception {
-        // ajax로 api호출해서 값받고 js로 전달
-
-        if (findwordservice.findByWord(word.getWord()) != null) {
-            // 3초 지연
-            Thread.sleep(3000);
-            return findwordservice.findByWord(word.getWord());
-
-        } else {
-            Thread.sleep(3000);
-            findwordservice.save(new Word(word.getWord(), findwordservice.getContent(word.getWord())));
-
-        }
-
-        return findwordservice.findByWord(word.getWord());
     }
 
     @GetMapping("/ajax")

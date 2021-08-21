@@ -97,3 +97,27 @@
 <footer>
     <head th:replace="fragments/module.html :: footer">
   </footer>
+  <script type="text/JavaScript" src="/js/dicfav.js"></script>
+  <script th:inline="javascript">
+	/*<![CDATA[*/
+	var btnText;
+	var period = /*[[${period}]]*/;
+	$("#"+period).addClass("active");
+	$("#btnGroup label").on("click", function(){
+	var thisBtn = $(this);
+	btnText = thisBtn.text();
+	  window.location.href = "/dictionaryfav?period=" + btnText;
+	})
+	var currentPage = /*[[${pagingData.currentPage}]]*/;
+	var totalPage =  /*[[${pagingData.totalPage}]]*/;
+	$("#pagination-demo").twbsPagination({
+		  totalPages: (totalPage == 0)?1:totalPage,
+		  startPage: currentPage,
+		  visiblePages: 10,
+		  initiateStartPageClick: false,
+		  onPageClick: function (event, page){
+			window.location.href = "/dictionaryfav?period=" + period + "&currentPage=" + page;
+		  }
+		  });
+	/*]]>*/
+  </script>
