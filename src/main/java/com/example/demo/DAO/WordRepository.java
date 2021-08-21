@@ -13,6 +13,7 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
+
     @Query("Update Word w SET w.content = :content WHERE w.word = :word")
     void updateContent(@Param("word") String word, @Param("content") String content);
 
