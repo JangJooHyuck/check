@@ -1,1 +1,1 @@
-select * from wordlog
+select * from words
