@@ -16,7 +16,6 @@ public interface WordLogRepository extends JpaRepository<WordLog, Long> {
                         + "from word_log " + "where created_date " + "between :startDate and :endDate "
                         + "group by word " + "order by count " + "desc " + "limit :start, 10" + ")t, "
                         + "(select @ROWNUM\\:=:start) R ", nativeQuery = true)
-
         List<WordRank> findWordRank(@Param("startDate") String startDate, @Param("endDate") String endDate,
                         @Param("start") int start);
 

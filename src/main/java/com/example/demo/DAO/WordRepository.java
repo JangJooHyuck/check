@@ -14,8 +14,13 @@ public interface WordRepository extends JpaRepository<Word, Long> {
     @Transactional
     @Modifying(clearAutomatically = true)
 
+    // @Query("Update Word w SET w.content = :content WHERE w.word = :word")
+    // void updateContent(@Param("word") String word, @Param("content") String
+    // content);
+
     @Query("Update Word w SET w.content = :content WHERE w.word = :word")
-    void updateContent(@Param("word") String word, @Param("content") String content);
+    void updateContent(@org.springframework.data.repository.query.Param("word") String word,
+            @org.springframework.data.repository.query.Param("content") String content);
 
     Word findByWord(String word);
 

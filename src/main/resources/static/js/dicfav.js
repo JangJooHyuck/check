@@ -8,7 +8,7 @@ $(".updateBtn").click(function(){
     updateWord = td.eq(1).text();
     console.log("update " + updateWord);
     $("#updateModal").modal("show");
-    document.getElementById("editedWord").innerText = "-" + updateWord + "-" + " 의 내용을 수정하겠습니다.";
+    document.getElementById("editedWord").innerText = updateWord + " 의 내용을 수정하겠습니다.";
 })
 
 $(".deleteBtn").click(function(){
@@ -18,7 +18,7 @@ $(".deleteBtn").click(function(){
     deleteWord = td.eq(1).text();
     console.log("delete " + deleteWord);
     $("#deleteModal").modal("show");
-    document.getElementById("deleteWord").innerText = "-" + deleteWord + "-" + " 단어를 삭제하겠습니다.";
+    document.getElementById("deleteWord").innerText = deleteWord + " 단어를 삭제하겠습니다.";
 })
 
 function saveWord(){
@@ -35,9 +35,11 @@ function saveWord(){
         }),
         dataType: "json",
         success:function(data){
+            
             closeModal();
         }
         ,error:function(data){
+            
             closeModal();
         }
     });

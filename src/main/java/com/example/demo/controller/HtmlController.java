@@ -118,7 +118,6 @@ public class HtmlController {
         model.addAttribute("wordRank", wordRank);
         model.addAttribute("period", period);
         model.addAttribute("pagingData", Paging.builder().currentPage(currentPage).totalPage(totalPage).build());
-
         return "dictionaryfav";
     }
 }
